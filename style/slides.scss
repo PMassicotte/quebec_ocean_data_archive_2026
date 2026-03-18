@@ -1,71 +1,82 @@
 /*-- scss:defaults --*/
 
-// fonts
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+// Everforest Dark Medium palette
+// bg:      #2d353b   bg_hard: #272e33   bg1: #374145   bg2: #3d484d
+// bg3:     #475258   bg4:     #4f585e   bg5: #56635f
+// fg:      #d3c6aa   red:     #e67e80   orange: #e69875  yellow: #dbbc7f
+// green:   #a7c080   aqua:    #83c092   blue:   #7fbbb3  purple: #d699b6
+// grey0:   #7a8478   grey1:   #859289   grey2:  #9da9a0
 
-$font-family-sans-serif: "Ubuntu";
-$presentation-heading-font: "Ubuntu";
+// Fonts
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap");
+
+$font-family-sans-serif: "Montserrat", sans-serif;
+$presentation-heading-font: "Baloo 2", sans-serif;
 
 $h1-font-size: 4.6rem !default;
 
-$theme-orange: #f69250;
-$theme-pastel: #9ec6be;
+// Everforest accent colors
+$theme-orange: #e69875;
+$theme-yellow: #dbbc7f;
+$theme-green:  #a7c080;
+$theme-aqua:   #83c092;
+$theme-blue:   #7fbbb3;
+$theme-purple: #d699b6;
+$theme-red:    #e67e80;
+
+$bg:       #2d353b;
+$bg-hard:  #272e33;
+$bg1:      #374145;
+$bg2:      #3d484d;
+$bg3:      #475258;
+$fg:       #d3c6aa;
+$grey1:    #859289;
+$grey2:    #9da9a0;
+
+$black: $bg;
+$white: $fg;
 
 /*-- scss:rules --*/
-.reveal table {
-  font-size: 0.75em;
-}
-
-.reveal blockquote {
-  color: #2c404a;
-  font-family: "Ubuntu";
-  font-weight: 400;
-  font-style: italic;
-}
-
-$black: #2c404a;
-$white: #ffffff;
 
 :root {
-  --r-background-color: #e3edfd;
-  --r-main-font: Ubuntu;
+  --r-background-color: #2d353b;
+  --r-main-font: "Montserrat", sans-serif;
   --r-main-font-size: 50px;
-  --r-main-color: #2c404a;
+  --r-main-color: #d3c6aa;
   --r-block-margin: 12px;
   --r-heading-margin: 0 0 12px 0;
-  --r-heading-font: Fredoka One;
-  --r-heading-color: #2c404a;
+  --r-heading-font: "Baloo 2", sans-serif;
+  --r-heading-color: #a7c080;
   --r-heading-line-height: 1.2;
   --r-heading-letter-spacing: normal;
-  --r-heading-text-transform: uppercase;
+  --r-heading-text-transform: none;
   --r-heading-text-shadow: none;
-  --r-heading-font-weight: 600;
+  --r-heading-font-weight: 700;
   --r-heading1-text-shadow: none;
   --r-heading1-size: 3em;
   --r-heading2-size: 1.8em;
   --r-heading3-size: 1.3em;
   --r-heading4-size: 1em;
-  --r-code-font: JetBrains Mono;
-  --r-link-color: $black;
-  --r-link-color-dark: #1a6091;
-  --r-link-color-hover: #4ca2df;
-  --r-selection-background-color: #d33682;
-  --r-selection-color: #fdf6e3;
+  --r-code-font: "Fira Code", monospace;
+  --r-link-color: #7fbbb3;
+  --r-link-color-dark: #83c092;
+  --r-link-color-hover: #a7c080;
+  --r-selection-background-color: #d699b6;
+  --r-selection-color: #2d353b;
 }
 
 // title slide
 #title-slide .title {
-  color: $black;
+  color: $theme-green;
   font-weight: bold;
   text-align: center;
-  font-family: "Poppins", sans-serif;
+  font-family: "Baloo 2", sans-serif;
 }
 
 #title-slide .quarto-title-authors {
-  color: $black;
+  color: $fg;
   text-align: left;
 }
 
@@ -79,93 +90,80 @@ $white: #ffffff;
 }
 
 // section title slide
-
 .reveal h1 {
-  font-family: "Poppins", serif;
+  font-family: "Baloo 2", sans-serif;
+  color: $theme-green;
 }
 
 .reveal h2 {
-  font-family: "Baloo 2", serif;
+  font-family: "Baloo 2", sans-serif;
   font-size: 2em;
+  color: $theme-green;
 }
 
 .reveal[data-navigation-mode="linear"] .title-slide h1 {
   font-size: 3em;
-  font-family: "Baloo 2", serif;
+  font-family: "Baloo 2", sans-serif;
   text-align: center;
   font-weight: bold;
-  font-color: $black;
-  color: #fdf6e3;
+  color: $theme-green;
 }
 
-// sizes
-.smallest {
-  font-size: 0.5em;
-}
-
-.smaller {
-  font-size: 0.6em;
-}
-.small {
+// table
+.reveal table {
   font-size: 0.75em;
 }
 
-.medium {
-  font-size: 0.9em;
+// blockquote
+.reveal blockquote {
+  color: $grey2;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  box-shadow: none;
+  font-size: 0.75em;
 }
 
-.larger {
-  font-size: 1.2em;
-}
-
-.large {
-  font-size: 1.5em;
-}
-
-.xlarge {
-  font-size: 1.8em;
-}
-
-.huge {
-  font-size: 2em;
-}
+// sizes
+.smallest { font-size: 0.5em; }
+.smaller  { font-size: 0.6em; }
+.small    { font-size: 0.75em; }
+.medium   { font-size: 0.9em; }
+.larger   { font-size: 1.2em; }
+.large    { font-size: 1.5em; }
+.xlarge   { font-size: 1.8em; }
+.huge     { font-size: 2em; }
 
 // alignment
-
 .center-align {
   text-align: center;
 }
 
 .reveal .white {
-  color: $white;
+  color: $fg;
 }
 
 .reveal .hand {
   font-family: "Little Days", cursive;
 }
 
-/* Apply styles to <a> elements with href attribute inside .reveal */
+/* Links */
 .reveal a[href] {
-  text-decoration: none; /* Remove default underline */
-  background-image: linear-gradient(to right, $theme-orange, $theme-orange);
-  background-position: 0 100%; /* Position at the bottom */
-  background-repeat: no-repeat; /* No repeat */
-  background-size: 100% 6px; /* Adjust thickness */
-  padding-bottom: 1px; /* Adds space for the underline */
+  text-decoration: none;
+  background-image: linear-gradient(to right, $theme-blue, $theme-blue);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 4px;
+  padding-bottom: 1px;
 }
 
-/* Optional: Override styles for <a> elements with href inside .sourceCode */
 .sourceCode a[href] {
-  text-decoration: none; /* Example override */
-  background-image: none; /* Remove background image */
-  color: inherit; /* Inherit color */
+  text-decoration: none;
+  background-image: none;
+  color: inherit;
 }
 
-.reveal blockquote {
-  box-shadow: none;
-  font-size: 0.75em;
-}
-
+/* Code blocks */
 .reveal pre,
 .reveal pre.sourceCode,
 .reveal pre.numberSource,
@@ -180,11 +178,12 @@ $white: #ffffff;
   font-weight: bold;
   line-height: 1.2em;
   border-radius: 8px;
-  padding: 1px 2px 1px 2px;
-  color: #4c4a4a;
-  background-color: #8cbbd7;
+  padding: 1px 4px;
+  color: $theme-yellow;
+  background-color: $bg3;
 }
 
+/* Fragment highlights */
 .reveal .slides section {
   .fragment.highlight-orange,
   .fragment.highlight-pastel {
@@ -193,43 +192,49 @@ $white: #ffffff;
   }
 
   .fragment.highlight-pastel.visible {
-    background-color: $theme-pastel;
-    padding: 0px;
+    background-color: $theme-aqua;
+    color: $bg-hard;
+    padding: 0;
     border-radius: 50px;
   }
 
   .fragment.highlight-orange.visible {
     background-color: $theme-orange;
-    padding: 0px;
+    color: $bg-hard;
+    padding: 0;
     border-radius: 50px;
   }
 }
 
-/* Emphasized text */
+/* Emphasized text — yellow highlighter with dark text */
 .emphasize {
-  background-color: $theme-pastel; /* Highlight color */
-  padding: 2px; /* Optional padding for better spacing */
+  background-color: $theme-yellow;
+  color: $bg-hard;
+  padding: 1px 4px;
   border-radius: 8px;
-  padding: 1px 1px 1px 1px;
   font-weight: bold;
 }
 
+/* Captions */
 .reveal .slide figure > figcaption,
 .reveal .slide img.stretch + p.caption,
 .reveal .slide img.r-stretch + p.caption {
   font-size: 0.6em;
   font-weight: 300;
   text-align: center;
+  color: $grey1;
 }
 
+/* Aside / footnotes */
 .reveal .slide aside,
 .reveal .slide div.aside {
   position: absolute;
   bottom: 20px;
   font-size: 0.6em;
-  color: #6f6f6f;
+  color: $grey1;
 }
 
+/* Vertical centering */
 .v-center-container {
   display: flex;
   justify-content: center;
@@ -237,16 +242,16 @@ $white: #ffffff;
   height: 90%;
 }
 
-/* Remove the link underline for the slide numbers, footer and home button */
+/* Footer / slide number / menu button links */
 .reveal .footer a[href],
 .slide-number a[href],
 .slide-menu-button a[href] {
   background-image: none;
-  color: #8f8f8f;
+  color: #7a8478;
   text-decoration: none;
 }
 
-/* Increase logo size while keeping aspect ratio */
+/* Logo */
 .reveal .slide-logo {
   height: auto !important;
   width: auto !important;
@@ -254,31 +259,32 @@ $white: #ffffff;
   max-height: 200px !important;
 }
 
-/* Date format on the title slide */
+/* Date on title slide */
 .date {
-  color: #6f6f6f;
+  color: $grey1;
   font-size: 0.8em;
   font-style: italic;
 }
 
-/* Italic subtitle on the title slide */
+/* Subtitle on title slide */
 #title-slide .subtitle,
 div.reveal div.slides section.quarto-title-block .subtitle {
   font-style: italic;
   font-weight: bolder;
+  color: $grey2;
 }
 
-/* Author on the title slide */
+/* Author on title slide */
 .reveal .quarto-title-block .quarto-title-authors .quarto-title-author {
-  color: #6f6f6f;
+  color: $grey1;
 }
 
-/* Add vertical space between paragraphs */
+/* Vertical spacing between paragraphs */
 .spaced p {
   margin-bottom: 1.2em;
 }
 
-/* Image on the top right corner */
+/* Top-right image utility class */
 .reveal .top-right-img {
   position: absolute;
   top: -1em;

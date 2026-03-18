@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "arf": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1773788002,
+        "narHash": "sha256-ysqgeQ8632dEyFWKRYp8dXjUEj8IVift5hUk6V4kN8w=",
+        "owner": "eitsupi",
+        "repo": "arf",
+        "rev": "3a60760e9aec72f018ea4985e1704883a4e0f8e6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "eitsupi",
+        "repo": "arf",
+        "type": "github"
+      }
+    },
     "ggpmthemes": {
       "flake": false,
       "locked": {
@@ -18,33 +34,17 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1771008912,
-        "narHash": "sha256-gf2AmWVTs8lEq7z/3ZAsgnZDhWIckkb+ZnAo5RzSxJg=",
+        "lastModified": 1773734432,
+        "narHash": "sha256-IF5ppUWh6gHGHYDbtVUyhwy/i7D261P7fWD1bPefOsw=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "a82ccc39b39b621151d6732718e3e250109076fa",
+        "rev": "cda48547b432e8d3b18b4180ba07473762ec8558",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "rNvim": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1772385431,
-        "narHash": "sha256-WxRhx9KTl9iB9jDcnbwWnrEKgEATw2SNloKfmmcF+OI=",
-        "owner": "R-nvim",
-        "repo": "R.nvim",
-        "rev": "1e93501e233731087db3b29d7633446688ce0d07",
-        "type": "github"
-      },
-      "original": {
-        "owner": "R-nvim",
-        "repo": "R.nvim",
         "type": "github"
       }
     },
@@ -66,9 +66,9 @@
     },
     "root": {
       "inputs": {
+        "arf": "arf",
         "ggpmthemes": "ggpmthemes",
         "nixpkgs": "nixpkgs",
-        "rNvim": "rNvim",
         "rnaturalearthhires": "rnaturalearthhires"
       }
     }

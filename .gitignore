@@ -1,8 +1,10 @@
-.direnv/
-/index_files
-
-/.quarto/
 **/*.quarto_ipynb
+.direnv/
+.r-libs/
+/.quarto/
 /_site
 /index.html
 /index_cache/revealjs
+/index_files
+flake.lock
+

@@ -3,8 +3,9 @@
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-  inputs.rNvim = {
-    url = "github:R-nvim/R.nvim";
+  # Track arf on main; run `nix flake update arf` (or `nix flake update`) to upgrade
+  inputs.arf = {
+    url = "github:eitsupi/arf";
     flake = false;
   };
 
@@ -21,6 +22,7 @@
   outputs =
     { self, ... }@inputs:
     let
+      lib = inputs.nixpkgs.lib;
       supportedSystems = [
         "x86_64-linux"
         "aarch64-linux"
@@ -42,25 +44,6 @@
     in
     {
       overlays.default = final: prev: rec {
-        # Build nvimcom manually from R.nvim source
-        nvimcom = final.rPackages.buildRPackage {
-          name = "nvimcom";
-          src = inputs.rNvim;
-          sourceRoot = "source/nvimcom";
-
-          buildInputs = with final; [
-            R
-            gcc
-            gnumake
-          ];
-
-          meta = {
-            description = "R.nvim communication package";
-            homepage = "https://github.com/R-nvim/R.nvim";
-            maintainers = [ ];
-          };
-        };
-
         # Build rnaturalearthhires from ropensci source
         rnaturalearthhires = final.rPackages.buildRPackage {
           name = "rnaturalearthhires";
@@ -94,10 +77,50 @@
           };
         };
 
-        # Shared R package list for both wrappers
-        rPackageList = with final.rPackages; [
+        # Build arf (modern Rust-based R console) from the flake input.
+        # To upgrade: nix flake update arf  (or just: nix flake update)
+        # If outputHashes need updating after upgrade, use lib.fakeHash → run `nix develop` → paste the "got: sha256-..." value.
+        arf = final.rustPlatform.buildRustPackage {
+          pname = "arf";
+          version = inputs.arf.shortRev or "unstable";
+
+          src = inputs.arf;
+
+          cargoLock = {
+            lockFile = "${inputs.arf}/Cargo.lock";
+            outputHashes = {
+              "crossterm-0.29.0" = "sha256-SLgsOq875vQXnKxoAfG5PvEegpRJrxXCD2CV1jyI9TQ=";
+              "rd-parser-0.1.0" = "sha256-gb3Q05D+qBWcjLnR5INMb5mn910KsSt5Tk/PW8EnUps=";
+              "rd2qmd-core-0.1.0" = "sha256-gb3Q05D+qBWcjLnR5INMb5mn910KsSt5Tk/PW8EnUps=";
+              "rd2qmd-mdast-0.1.0" = "sha256-gb3Q05D+qBWcjLnR5INMb5mn910KsSt5Tk/PW8EnUps=";
+              "tree-sitter-r-1.2.0" = "sha256-H4iK2p4xXjP6gGrOP/qpHQCiO3Jyy0jmb8u29RM0sBg=";
+            };
+          };
+
+          # Two cd/tilde tests fail in the Nix sandbox (no $HOME), skip them
+          doCheck = false;
+
+          buildInputs = with final; lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
+          nativeBuildInputs = with final; [ pkg-config ];
+
+          meta = {
+            description = "A modern Rust-based R console with fuzzy history, tree-sitter highlighting, and vi/emacs modes";
+            homepage = "https://github.com/eitsupi/arf";
+            license = lib.licenses.mit;
+            mainProgram = "arf";
+          };
+        };
+
+        # IDE packages — required by R.nvim editor features, stable across projects
+        ideRPackages = with final.rPackages; [
+          httpgd # hgd_browse keymap in r.lua
+          data_table # view_df save_fun uses data.table::fwrite
+        ];
+
+        # Project packages — specific to this analysis, the reproducible core
+        # Edit this list per project
+        projectRPackages = with final.rPackages; [
           cli
-          cyclocomp
           fs
           ggpmthemes
           ggthemes
@@ -107,10 +130,7 @@
           httpgd
           janitor
           knitr
-          languageserver
-          lintr
           magick
-          nvimcom
           patchwork
           pins
           quarto
@@ -124,6 +144,8 @@
           tidyverse
         ];
 
+        rPackageList = ideRPackages ++ projectRPackages;
+
         # Create rWrapper with packages (for LSP and R.nvim)
         wrappedR = final.rWrapper.override { packages = rPackageList; };
 
@@ -134,38 +156,23 @@
       devShells = forEachSupportedSystem (
         { pkgs }:
         {
-          default = pkgs.mkShellNoCC {
+          default = pkgs.mkShell {
             packages = with pkgs; [
-              imagemagick
-              quarto
               wrappedR # R with packages for LSP
               wrappedRadian # radian with packages for interactive use
+              arf # modern Rust-based R console
+              jarl # fast R linter (from nixpkgs)
+              quarto
             ];
 
-            env.QUARTO_R = "${pkgs.wrappedR}/bin/R";
+            shellHook = ''
+              export R_HOME=$(R RHOME)
+              export R_LIBS_SITE=$(grep -oP "'/nix/store/[^']+/library'" "$(command -v R)" | tr -d "'" | sort -u | paste -sd: -)
+              export R_LIBS_USER="$PWD/.r-libs"
+              mkdir -p "$R_LIBS_USER"
+            '';
           };
         }
       );
-
-      templates = {
-        default = {
-          path = ./.;
-          description = "R development environment with nvimcom and R.nvim integration";
-          welcomeText = ''
-            # R Nix Development Environment
-
-            ## Getting started
-            - Customize R packages in flake.nix rPackageList
-            - Enter the shell with `nix develop`
-
-            ## What's included
-            - R with languageserver, nvimcom, lintr, fs, and cli
-            - radian (modern R console)
-            - Configured for R.nvim integration
-            - Pre-configured .lintr file with opinionated linting rules
-
-          '';
-        };
-      };
     };
 }

@@ -3,7 +3,7 @@ title: "Data Management Best Practices"
 subtitle: "Making your data projects more reproducible, reusable and open"
 author: "Philippe Massicotte"
 institute: "Laval University"
-date: "2026-03-11"
+date: "2026-03-25"
 date-format: long
 title-slide-attributes:
   data-background-size: 100% 100%
@@ -14,7 +14,6 @@ format:
       - title-slide.html
     fig-dpi: 300
     theme: style/slides.scss
-    footer: "[{{< fa house >}} https://pmassicotte.github.io/gestion_donnees_recherche_foresterie_2026](https://pmassicotte.github.io/gestion_donnees_recherche_foresterie_2026)"
     height: 1080
     width: 1920
     slide-number: c/t
@@ -27,7 +26,6 @@ execute:
 
 citation:
   type: speech
-  url: https://pmassicotte.github.io/gestion_donnees_recherche_foresterie_2026
   language: fr-CA
 ---
 
@@ -118,7 +116,7 @@ Unless otherwise stated, all images in this presentation are AI generated.
 
 :::
 
-# File formats {background-color="#2C404A"}
+# File formats {background-color="#272e33"}
 
 ::: {.center .v-center-container}
 
@@ -516,7 +514,7 @@ pixel_values |>
 
 ::::
 
-# Data project good practices {background-color="#2C404A"}
+# Data project good practices {background-color="#272e33"}
 
 ::: {.center-align}
 
@@ -601,19 +599,19 @@ Why bother documenting your data?
 ## README file example
 
 ```{=html}
-<div style="border: 1px solid #d0d7de; border-radius: 6px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 22px; width: 100%; height: 80vh; display: flex; flex-direction: column; box-sizing: border-box; background-color: #ffffff;">
-  <div style="background: #f6f8fa; padding: 12px 24px; border-bottom: 1px solid #d0d7de; border-radius: 6px 6px 0 0; color: #57606a; display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
+<div style="border: 1px solid #475258; border-radius: 6px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 22px; width: 100%; height: 80vh; display: flex; flex-direction: column; box-sizing: border-box; background-color: #2d353b;">
+  <div style="background: #374145; padding: 12px 24px; border-bottom: 1px solid #475258; border-radius: 6px 6px 0 0; color: #9da9a0; display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
     📄 <strong>README.md</strong>
   </div>
-  <div style="padding: 24px 40px; line-height: 1.6; flex: 1; display: flex; flex-direction: column; justify-content: space-evenly;">
-    <h1 style="font-size: 1.4em; border-bottom: 1px solid #d0d7de; padding-bottom: 6px; margin: 0;">Forest Inventory 2024</h1>
+  <div style="padding: 24px 40px; line-height: 1.6; flex: 1; display: flex; flex-direction: column; justify-content: space-evenly; color: #d3c6aa;">
+    <h1 style="font-size: 1.4em; border-bottom: 1px solid #475258; padding-bottom: 6px; margin: 0; color: #a7c080;">Forest Inventory 2024</h1>
     <div>
-      <h2 style="font-size: 1.1em; margin: 0 0 4px 0;">Project description</h2>
+      <h2 style="font-size: 1.1em; margin: 0 0 4px 0; color: #a7c080;">Project description</h2>
       <p style="margin: 0;">Inventory of tree species and diameter at breast height (DBH) in the Montmorency Forest, collected in summer 2024.</p>
     </div>
     <div>
-      <h2 style="font-size: 1.1em; margin: 0 0 4px 0;">Directory structure</h2>
-      <pre style="background: #f6f8fa; padding: 12px 18px; border-radius: 6px; font-size: 18px; line-height: 1.6; margin: 0;">project/
+      <h2 style="font-size: 1.1em; margin: 0 0 4px 0; color: #a7c080;">Directory structure</h2>
+      <pre style="background: #374145; padding: 12px 18px; border-radius: 6px; font-size: 18px; line-height: 1.6; margin: 0; color: #d3c6aa;">project/
 ├── data/
 │   ├── raw/          # Raw field data (do not modify)
 │   └── processed/    # Cleaned datasets
@@ -622,12 +620,12 @@ Why bother documenting your data?
 └── README.md</pre>
     </div>
     <div>
-      <h2 style="font-size: 1.1em; margin: 0 0 4px 0;">How to run</h2>
-      <p style="margin: 0;">Run scripts in order: <code style="background:#f6f8fa; padding: 2px 6px; border-radius: 4px;">01_clean.R</code> → <code style="background:#f6f8fa; padding: 2px 6px; border-radius: 4px;">02_analysis.R</code> → <code style="background:#f6f8fa; padding: 2px 6px; border-radius: 4px;">03_figures.R</code></p>
+      <h2 style="font-size: 1.1em; margin: 0 0 4px 0; color: #a7c080;">How to run</h2>
+      <p style="margin: 0;">Run scripts in order: <code style="background:#374145; color: #dbbc7f; padding: 2px 6px; border-radius: 4px;">01_clean.R</code> → <code style="background:#374145; color: #dbbc7f; padding: 2px 6px; border-radius: 4px;">02_analysis.R</code> → <code style="background:#374145; color: #dbbc7f; padding: 2px 6px; border-radius: 4px;">03_figures.R</code></p>
     </div>
     <div>
-      <h2 style="font-size: 1.1em; margin: 0 0 4px 0;">Contact</h2>
-      <p style="margin: 0;">Jane Doe — <a href="mailto:jane.doe@ulaval.ca" style="color: #0969da;">jane.doe@ulaval.ca</a></p>
+      <h2 style="font-size: 1.1em; margin: 0 0 4px 0; color: #a7c080;">Contact</h2>
+      <p style="margin: 0;">Jane Doe — <a href="mailto:jane.doe@ulaval.ca" style="color: #7fbbb3;">jane.doe@ulaval.ca</a></p>
     </div>
   </div>
 </div>
@@ -701,7 +699,7 @@ trees <- trees[trees$dbh > min_dbh_cm, ]
 
 ::::
 
-# File and variable naming {background-color="#2C404A"}
+# File and variable naming {background-color="#272e33"}
 
 ::: {.center-align}
 
@@ -882,7 +880,7 @@ Note the cells with more than one value in the column. This is a common issue wh
 
 :::
 
-# Tidy data {background-color="#2C404A"}
+# Tidy data {background-color="#272e33"}
 
 ::: {.center-align}
 
@@ -1074,7 +1072,7 @@ df |>
   ylab("Count")
 ```
 
-# Backups {background-color="#2C404A"}
+# Backups {background-color="#272e33"}
 
 ## It is not _if_, but _when_ your hard drive will fail.
 
@@ -1184,7 +1182,7 @@ I keep three months of data at three different locations:
 
 :::
 
-# Publishing your data {background-color="#2C404A"}
+# Publishing your data {background-color="#272e33"}
 
 ## Publishing your data
 
@@ -1337,7 +1335,7 @@ df_viz |>
 - Figshare [https://figshare.com/](https://figshare.com/){target="\_blank"}
 - The Dataverse Project [https://dataverse.org/](https://dataverse.org/){target="\_blank"}
 
-# Take home messages {background-color="#2C404A"}
+# Take home messages {background-color="#272e33"}
 
 ## Take home messages
 

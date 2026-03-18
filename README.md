@@ -1,5 +1,1 @@
-# Atelier de gestion des données
-
-[![Quarto Publish](https://github.com/PMassicotte/gestion_donnees_recherche_foresterie_2026/actions/workflows/quarto_build.yml/badge.svg)](https://github.com/PMassicotte/gestion_donnees_recherche_foresterie_2026/actions/workflows/quarto_build.yml)
-
-Le site web de cet atelier est hébergé sur GitHub Pages à l'adresse suivante : [https://pmassicotte.github.io/gestion_donnees_recherche_foresterie_2026/](https://pmassicotte.github.io/gestion_donnees_recherche_foresterie_2026/)
+# Atelier de gestion des données Québec Océan 2026
