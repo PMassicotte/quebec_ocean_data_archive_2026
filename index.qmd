@@ -72,7 +72,9 @@ theme_update(
 ![](./img/logo/terminal_phil.png){fig-alt="Badge showing the name of the presenter (Philippe Massicotte)."}
 :::
 
-::: {.column width=50% .spaced}
+::: {.column width=50% .spaced .medium}
+
+<br>
 
 {{< fa brands github >}} https://github.com/PMassicotte
 
@@ -209,7 +211,7 @@ These files contain information on geographic features such as [points, lines or
 - ESRI shapefile (`.SHP`)
   - Technically, the shapefile format is not open. [It is, however, widely used.]{.emphasize}
 
-- GeoJSON (`.json`, `.geojson`, JSON variant with simple geographical features)
+- GeoJSON (`.geojson`, JSON variant with simple geographical features)
 
 - GeoTIFF (`.tif`, `.tiff`, TIFF variant enriched with GIS relevant metadata)
 
@@ -599,7 +601,7 @@ Why bother documenting your data?
 ## README file example
 
 ```{=html}
-<div style="border: 1px solid #475258; border-radius: 6px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 22px; width: 100%; height: 80vh; display: flex; flex-direction: column; box-sizing: border-box; background-color: #2d353b;">
+<div style="border: 1px solid #475258; border-radius: 6px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 26px; width: 100%; height: 80vh; display: flex; flex-direction: column; box-sizing: border-box; background-color: #2d353b;">
   <div style="background: #374145; padding: 12px 24px; border-bottom: 1px solid #475258; border-radius: 6px 6px 0 0; color: #9da9a0; display: flex; align-items: center; gap: 8px; flex-shrink: 0;">
     📄 <strong>README.md</strong>
   </div>
@@ -611,7 +613,7 @@ Why bother documenting your data?
     </div>
     <div>
       <h2 style="font-size: 1.1em; margin: 0 0 4px 0; color: #a7c080;">Directory structure</h2>
-      <pre style="background: #374145; padding: 12px 18px; border-radius: 6px; font-size: 18px; line-height: 1.6; margin: 0; color: #d3c6aa;">project/
+      <pre style="background: #374145; padding: 12px 18px; border-radius: 6px; font-size: 22px; line-height: 1.6; margin: 0; color: #d3c6aa;">project/
 ├── data/
 │   ├── raw/          # Raw field data (do not modify)
 │   └── processed/    # Cleaned datasets
@@ -677,9 +679,9 @@ In your code:
 Bad [{{< fa times >}}]{style="color: #E6352FFF;"}
 
 ```r
-# Set x to 5
-x <- 5L
-d <- d[d$v > x, ]
+# Remove low values
+x <- 0.1
+d <- d[d$v >= x, ]
 ```
 
 :::
@@ -689,10 +691,10 @@ d <- d[d$v > x, ]
 Good [{{< fa check >}}]{style="color: #34A74BFF;"}
 
 ```r
-# Trees below 5 cm DBH are likely
-# measurement errors (see protocol v2)
-min_dbh_cm <- 5L
-trees <- trees[trees$dbh > min_dbh_cm, ]
+# Chlorophyll-a below 0.1 mg/m³ is below
+# sensor detection limit (SeaBird SBE 19+)
+min_chla_mg_m3 <- 0.1
+ctd <- ctd[ctd$chla >= min_chla_mg_m3, ]
 ```
 
 :::
@@ -1223,7 +1225,7 @@ The traditional way to publish data is to include it as supplementary informatio
 
 ::: {.center-align}
 
-![](https://media.giphy.com/media/j9Y9vsklHWtjgHOtLk/giphy.gif){width=800 fig-alt="GIF showing a person throwing a book over his shoulder."}
+![](https://media.giphy.com/media/j9Y9vsklHWtjgHOtLk/giphy.gif){width=700 fig-alt="GIF showing a person throwing a book over his shoulder."}
 
 :::
 
@@ -1326,14 +1328,14 @@ df_viz |>
 
 ## Open data repositories
 
-- Scholars Portal Dataverse [https://dataverse.scholarsportal.info/](https://dataverse.scholarsportal.info/){target="\_blank"}
-- Federated Research Data Repository [https://www.frdr-dfdr.ca/repo/?locale=fr](https://www.frdr-dfdr.ca/repo/?locale=fr){target="\_blank"}
-- National Terrestrial Ecosystem Monitoring System (NTEMS) [https://opendata.nfis.org/mapserver/nfis-change_eng.html](https://opendata.nfis.org/mapserver/nfis-change_eng.html){target="\_blank"}
-- Dryad [https://datadryad.org](https://datadryad.org){target="\_blank"}
-- Catalogue de données de l'OGSL [https://ogsl.ca/fr/](https://ogsl.ca/fr/){target="\_blank"}
-- Zenodo [https://zenodo.org/](https://zenodo.org/){target="\_blank"}
-- Figshare [https://figshare.com/](https://figshare.com/){target="\_blank"}
-- The Dataverse Project [https://dataverse.org/](https://dataverse.org/){target="\_blank"}
+- [Scholars Portal Dataverse](https://dataverse.scholarsportal.info/){target="\_blank"}
+- [Federated Research Data Repository](https://www.frdr-dfdr.ca/repo/?locale=fr){target="\_blank"}
+- [National Terrestrial Ecosystem Monitoring System (NTEMS)](https://opendata.nfis.org/mapserver/nfis-change_eng.html){target="\_blank"}
+- [Dryad](https://datadryad.org){target="\_blank"}
+- [Catalogue de données de l'OGSL](https://ogsl.ca/fr/){target="\_blank"}
+- [Zenodo](https://zenodo.org/){target="\_blank"}
+- [Figshare](https://figshare.com/){target="\_blank"}
+- [The Dataverse Project](https://dataverse.org/){target="\_blank"}
 
 # Take home messages {background-color="#272e33"}
 
