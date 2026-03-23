@@ -298,162 +298,36 @@
 <li class="fragment"><p><strong>Performance</strong>: consideration for efficient read and write operations, especially for large datasets, is crucial for optimal performance.</p></li>
 </ol>
 </section>
-<section id="common-open-source-text-file-formats" class="slide level2">
-<h2>Common open-source text file formats</h2>
-<p>Tabular plain text file formats:</p>
+<section id="common-open-source-tabular-file-formats" class="slide level2">
+<h2>Common open-source tabular file formats</h2>
+<p>Plain text file formats that can be opened using a simple text editor:</p>
 <ul>
-<li><p><code>.CSV</code>: Comma (or semicolon) separated values.</p></li>
-<li><p><code>.TAB</code>: Tab separated values.</p></li>
-<li><p><code>.TXT</code> and <code>.DAT</code>: Plain text files (<span class="emphasize">data delimiter is not known</span>).</p></li>
+<li class="fragment"><p><code>.CSV</code>: Comma (or semicolon) separated values.</p></li>
+<li class="fragment"><p><code>.TSV</code> / <code>.TAB</code>: Tab separated values.</p></li>
+<li class="fragment"><p><code>.TXT</code> and <code>.DAT</code>: Plain text files (<span class="emphasize">data delimiter is not known</span>).</p></li>
+<li class="fragment"><p><a href="https://parquet.apache.org/" target="_blank">Apache Parquet</a> (<code>.parquet</code>): columnar binary format, excellent for large datasets.</p></li>
 </ul>
-<p>All these file formats can be opened using a simple text editor.</p>
 </section>
-<section id="examples-of-csv-and-tsv-files" class="slide level2">
-<h2>Examples of CSV and TSV files</h2>
-<!-- Screenshots made using maim -->
-<!-- maim ~/Desktop/penguins_tsv_format.png -g 1300x725+4070+210 -->
-<p><img data-src="img/artwork/lter_penguins.png" class="top-right-img" alt="The Palmer penguin representation by Allison Horst. The image shows three penguins: Adelie, Chinstrap, and Gentoo."></p>
-<p>This dataset contains 4 variables (columns). <span class="emphasize">The first line generally includes the names of the variables.</span></p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><span class="smaller">A comma-separated values file (<code>.csv</code>).</span></p>
-<p><img data-src="./img/screenshots/penguins_csv_format.png" alt="Screenshot of a CSV file with the content of the Palmer penguins dataset"></p>
-</div><div class="column" style="width:50%;">
-<p><span class="smaller">A tabs separated values file (<code>.tsv</code>).</span></p>
-<p><img data-src="./img/screenshots/penguins_tsv_format.png" alt="Screenshot of a TSV file with the content of the Palmer penguins dataset"></p>
-</div></div>
-
-<aside><div>
-<p>Data source: Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. <a href="https://allisonhorst.github.io/palmerpenguins/" target="_blank">https://allisonhorst.github.io/palmerpenguins/</a> Artwork by <span class="citation" data-cites="allison_horst">@allison_horst</span>.</p>
-</div></aside></section>
 <section id="common-open-source-geographic-file-formats" class="slide level2">
 <h2>Common open-source geographic file formats</h2>
-<p>These files contain information on geographic features such as <span class="emphasize">points, lines or polygons</span>. There are a ton of <a href="https://gisgeography.com/gis-formats/" target="_blank">geographical file formats</a>, but here are some that are particularly popular.</p>
+<p>Geographic features such as <span class="emphasize">points, lines or polygons</span>:</p>
 <ul>
-<li class="fragment"><p>ESRI shapefile (<code>.SHP</code>)</p>
-<ul>
-<li class="fragment">Technically, the shapefile format is not open. <span class="emphasize">It is, however, widely used.</span></li>
-</ul></li>
-<li class="fragment"><p>GeoJSON (<code>.geojson</code>, JSON variant with simple geographical features)</p></li>
-<li class="fragment"><p>GeoTIFF (<code>.tif</code>, <code>.tiff</code>, TIFF variant enriched with GIS relevant metadata)</p></li>
-<li class="fragment"><p>GeoParquet (<code>.parquet</code>) is an <a href="https://geoparquet.org/" target="_blank">Open Geospatial Consortium (OGC) standard</a> standard that adds interoperable geospatial types (Point, Line, Polygon) to <a href="https://parquet.apache.org/" target="_blank">Apache Parquet</a>.</p></li>
+<li class="fragment"><p>ESRI Shapefile (<code>.shp</code>) — widely used, but <span class="emphasize">technically not open</span>.</p></li>
+<li class="fragment"><p>GeoJSON (<code>.geojson</code>) — JSON-based, human-readable, great for web mapping.</p></li>
+<li class="fragment"><p>GeoTIFF (<code>.tif</code>) — georeferenced raster data (e.g., satellite imagery, SST).</p></li>
+<li class="fragment"><p><a href="https://geoparquet.org/" target="_blank">GeoParquet</a> (<code>.parquet</code>) — adds geospatial types to Apache Parquet (<span class="emphasize">OGC standard</span>).</p></li>
 </ul>
 </section>
-<section id="the-geojson-format-polygons" class="slide level2">
-<h2>The GeoJSON format (Polygons)</h2>
-<p>This is a simple GeoJSON file defining 3 points that form a polygon.</p>
-<div class="columns">
-<div class="column" style="width:25%;">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource json number-lines code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href=""></a><span class="fu">{</span></span>
-<span id="cb1-2"><a href=""></a>  <span class="dt">"type"</span><span class="fu">:</span> <span class="st">"Polygon"</span><span class="fu">,</span></span>
-<span id="cb1-3"><a href=""></a>  <span class="dt">"coordinates"</span><span class="fu">:</span> <span class="ot">[</span></span>
-<span id="cb1-4"><a href=""></a>    <span class="ot">[</span><span class="dv">30</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">],</span></span>
-<span id="cb1-5"><a href=""></a>    <span class="ot">[</span><span class="dv">10</span><span class="ot">,</span> <span class="dv">30</span><span class="ot">],</span></span>
-<span id="cb1-6"><a href=""></a>    <span class="ot">[</span><span class="dv">40</span><span class="ot">,</span> <span class="dv">40</span><span class="ot">],</span></span>
-<span id="cb1-7"><a href=""></a>    <span class="ot">[</span><span class="dv">30</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">]</span></span>
-<span id="cb1-8"><a href=""></a>  <span class="ot">]</span></span>
-<span id="cb1-9"><a href=""></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div><div class="column" style="width:75%;">
-<div class="cell" data-layout-align="center" data-crop="true">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure>
-<p><img data-src="index_files/figure-revealjs/geojson-polygon-1.png" class="quarto-figure quarto-figure-center" style="width:50.0%" alt="A triangle polygon plotted with ggplot2, defined by three GeoJSON coordinates shown as red points at each vertex."></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-
-<aside><div>
-<p>Create your own GeoJSON file online at <a href="https://geojson.io/" target="_blank">https://geojson.io/</a></p>
-</div></aside></section>
-<section id="the-geojson-format" class="slide level2">
-<h2>The GeoJSON format</h2>
-
-<img data-src="index_files/figure-revealjs/geojson-colosseum-1.png" style="width:75.0%" alt="The outline of the Colosseum amphitheatre in Rome created using a geojson file." class="r-stretch quarto-figure-center"><p class="caption">Data: <a href="https://bit.ly/2pAjOAr">https://bit.ly/2pAjOAr</a></p></section>
-<section id="the-geotiff-format" class="slide level2">
-<h2>The GeoTIFF format</h2>
-<p>Often associated with satellite imagery.</p>
-<blockquote>
-<p>GeoTIFF is a public domain metadata standard that allows <span class="emphasize">georeferencing information to be embedded within a TIFF file.</span> The potential additional information includes map projection, coordinate systems, ellipsoids, datums, and everything else necessary to establish the exact spatial reference for the file.</p>
-<p><a href="https://en.wikipedia.org/wiki/GeoTIFF" target="_blank">Wikipedia</a></p>
-</blockquote>
-<div class="center-align">
-<p><img data-src="img/ai/geotiff.png" alt="AI generated image of a computer screen showing some sci-fi images." height="600"></p>
-</div>
-</section>
-<section id="the-geotiff-format-sst" class="slide level2">
-<h2>The GeoTIFF format (SST)</h2>
-<p>A GeoTIFF can contain information such as the Sea Surface Temperature (SST).</p>
-
-<img data-src="index_files/figure-revealjs/sst-st-lawrence-map-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:75.0%" alt="Sea Surface Temperature (SST) in the St-Lawrence River."></section>
-<section id="the-geotiff-format-sst-1" class="slide level2">
-<h2>The GeoTIFF format (SST)</h2>
-<p>A closer look allows us to better visualize the values (i.e., water temperature) within each pixel.</p>
-
-<img data-src="index_files/figure-revealjs/sst-pixel-values-1.png" class="quarto-figure quarto-figure-center r-stretch" alt="Close-up view of Sea Surface Temperature pixel values in the St-Lawrence River, with numerical temperature values labeled within each raster cell." width="3000"></section>
 <section id="a-note-on-geospatial-data" class="slide level2">
 <h2>A note on geospatial data</h2>
-<p>It is usually a better idea to work with spatial objects (ex.: <code>GeoTIFF</code>, or <code>geoparquet</code>) rather than tabular data.</p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><strong>Geographic data presented in a tabular form:</strong></p>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th style="text-align: right;">longitude</th>
-<th style="text-align: right;">latitude</th>
-<th style="text-align: right;">sst</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">-66.425</td>
-<td style="text-align: right;">49.975</td>
-<td style="text-align: right;">-1.60</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-66.375</td>
-<td style="text-align: right;">49.975</td>
-<td style="text-align: right;">-1.57</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">-66.325</td>
-<td style="text-align: right;">49.975</td>
-<td style="text-align: right;">-1.52</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-66.275</td>
-<td style="text-align: right;">49.975</td>
-<td style="text-align: right;">-1.47</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">-66.225</td>
-<td style="text-align: right;">49.975</td>
-<td style="text-align: right;">-1.42</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">-66.175</td>
-<td style="text-align: right;">49.975</td>
-<td style="text-align: right;">-1.38</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p><strong>It is much easier to work with <em>spatial data</em>:</strong></p>
+<p>It is usually a better idea to work with spatial objects (ex.: <code>GeoTIFF</code>, or <code>GeoParquet</code>) rather than tabular data.</p>
+<p><span class="emphasize">Spatial formats preserve geometry, projection, and metadata</span>, enabling:</p>
 <ul>
-<li><p>Geometric operations</p></li>
-<li><p>Geographic Projection</p></li>
-<li><p>Data extraction</p></li>
-<li><p>Joining</p></li>
-<li><p>And much more!</p></li>
+<li class="fragment"><p>Geometric operations (buffer, intersection, union)</p></li>
+<li class="fragment"><p>Geographic projection and coordinate transformations</p></li>
+<li class="fragment"><p>Spatial joins and data extraction</p></li>
+<li class="fragment"><p>Direct visualization and mapping</p></li>
 </ul>
-</div></div>
 </section></section>
 <section>
 <section id="data-project-good-practices" class="title-slide slide level1 center" data-background-color="#272e33">
@@ -556,31 +430,31 @@
 <section id="documenting-your-code" class="slide level2">
 <h2>Documenting your code</h2>
 <p>Add a <strong>header block</strong> at the top of each script/function:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="font-size: 1em;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co">#' Convert Coordinates</span></span>
-<span id="cb2-2"><a href=""></a><span class="co">#'</span></span>
-<span id="cb2-3"><a href=""></a><span class="co">#' This function converts coordinates from degrees and minutes to decimal</span></span>
-<span id="cb2-4"><a href=""></a><span class="co">#' degrees.</span></span>
-<span id="cb2-5"><a href=""></a><span class="co">#'</span></span>
-<span id="cb2-6"><a href=""></a><span class="co">#' @param coords A character vector of coordinates in the format "degrees</span></span>
-<span id="cb2-7"><a href=""></a><span class="co">#' minutes".</span></span>
-<span id="cb2-8"><a href=""></a><span class="co">#'</span></span>
-<span id="cb2-9"><a href=""></a><span class="co">#' @return A character vector of coordinates in decimal degrees.</span></span>
-<span id="cb2-10"><a href=""></a>convert_coords <span class="ot">&lt;-</span> <span class="cf">function</span>(coords) {</span>
-<span id="cb2-11"><a href=""></a>  parts <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(coords, <span class="st">" "</span>, <span class="dv">2</span>L)</span>
-<span id="cb2-12"><a href=""></a></span>
-<span id="cb2-13"><a href=""></a>  degrees <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">1</span>L])</span>
-<span id="cb2-14"><a href=""></a>  minutes <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">2</span>L])</span>
-<span id="cb2-15"><a href=""></a></span>
-<span id="cb2-16"><a href=""></a>  decimal_degrees <span class="ot">&lt;-</span> degrees <span class="sc">+</span> (minutes <span class="sc">/</span> <span class="dv">60</span>L)</span>
-<span id="cb2-17"><a href=""></a></span>
-<span id="cb2-18"><a href=""></a>  signed_degrees <span class="ot">&lt;-</span> <span class="fu">if_else</span>(</span>
-<span id="cb2-19"><a href=""></a>    <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"W"</span>)) <span class="sc">|</span> <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"S"</span>)),</span>
-<span id="cb2-20"><a href=""></a>    <span class="sc">-</span>decimal_degrees,</span>
-<span id="cb2-21"><a href=""></a>    decimal_degrees</span>
-<span id="cb2-22"><a href=""></a>  )</span>
-<span id="cb2-23"><a href=""></a></span>
-<span id="cb2-24"><a href=""></a>  <span class="fu">as.character</span>(signed_degrees)</span>
-<span id="cb2-25"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="font-size: 1em;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co">#' Convert Coordinates</span></span>
+<span id="cb1-2"><a href=""></a><span class="co">#'</span></span>
+<span id="cb1-3"><a href=""></a><span class="co">#' This function converts coordinates from degrees and minutes to decimal</span></span>
+<span id="cb1-4"><a href=""></a><span class="co">#' degrees.</span></span>
+<span id="cb1-5"><a href=""></a><span class="co">#'</span></span>
+<span id="cb1-6"><a href=""></a><span class="co">#' @param coords A character vector of coordinates in the format "degrees</span></span>
+<span id="cb1-7"><a href=""></a><span class="co">#' minutes".</span></span>
+<span id="cb1-8"><a href=""></a><span class="co">#'</span></span>
+<span id="cb1-9"><a href=""></a><span class="co">#' @return A character vector of coordinates in decimal degrees.</span></span>
+<span id="cb1-10"><a href=""></a>convert_coords <span class="ot">&lt;-</span> <span class="cf">function</span>(coords) {</span>
+<span id="cb1-11"><a href=""></a>  parts <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(coords, <span class="st">" "</span>, <span class="dv">2</span>L)</span>
+<span id="cb1-12"><a href=""></a></span>
+<span id="cb1-13"><a href=""></a>  degrees <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">1</span>L])</span>
+<span id="cb1-14"><a href=""></a>  minutes <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">2</span>L])</span>
+<span id="cb1-15"><a href=""></a></span>
+<span id="cb1-16"><a href=""></a>  decimal_degrees <span class="ot">&lt;-</span> degrees <span class="sc">+</span> (minutes <span class="sc">/</span> <span class="dv">60</span>L)</span>
+<span id="cb1-17"><a href=""></a></span>
+<span id="cb1-18"><a href=""></a>  signed_degrees <span class="ot">&lt;-</span> <span class="fu">if_else</span>(</span>
+<span id="cb1-19"><a href=""></a>    <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"W"</span>)) <span class="sc">|</span> <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"S"</span>)),</span>
+<span id="cb1-20"><a href=""></a>    <span class="sc">-</span>decimal_degrees,</span>
+<span id="cb1-21"><a href=""></a>    decimal_degrees</span>
+<span id="cb1-22"><a href=""></a>  )</span>
+<span id="cb1-23"><a href=""></a></span>
+<span id="cb1-24"><a href=""></a>  <span class="fu">as.character</span>(signed_degrees)</span>
+<span id="cb1-25"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="documenting-your-code-1" class="slide level2">
 <h2>Documenting your code</h2>
@@ -592,15 +466,15 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Bad <span style="color: #E6352FFF;"><i class="fa-solid fa-times" aria-label="times"></i></span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Remove low values</span></span>
-<span id="cb3-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb3-3"><a href=""></a>d <span class="ot">&lt;-</span> d[d<span class="sc">$</span>v <span class="sc">&gt;=</span> x, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Remove low values</span></span>
+<span id="cb2-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb2-3"><a href=""></a>d <span class="ot">&lt;-</span> d[d<span class="sc">$</span>v <span class="sc">&gt;=</span> x, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p>Good <span style="color: #34A74BFF;"><i class="fa-solid fa-check" aria-label="check"></i></span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Chlorophyll-a below 0.1 mg/m³ is below</span></span>
-<span id="cb4-2"><a href=""></a><span class="co"># sensor detection limit (SeaBird SBE 19+)</span></span>
-<span id="cb4-3"><a href=""></a>min_chla_mg_m3 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb4-4"><a href=""></a>ctd <span class="ot">&lt;-</span> ctd[ctd<span class="sc">$</span>chla <span class="sc">&gt;=</span> min_chla_mg_m3, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Chlorophyll-a below 0.1 mg/m³ is below</span></span>
+<span id="cb3-2"><a href=""></a><span class="co"># sensor detection limit (SeaBird SBE 19+)</span></span>
+<span id="cb3-3"><a href=""></a>min_chla_mg_m3 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb3-4"><a href=""></a>ctd <span class="ot">&lt;-</span> ctd[ctd<span class="sc">$</span>chla <span class="sc">&gt;=</span> min_chla_mg_m3, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </section></section>
 <section>
@@ -739,9 +613,9 @@
 <p><img data-src="img/screenshots/invalid_multibyte_string.png" style="width:70.0%" alt="Screenshot showing an error message in R when trying to read a file with a special character."></p>
 </div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a>r<span class="sc">$</span><span class="er">&gt;</span> <span class="fu">read_csv</span>(<span class="st">"myfile.csv"</span>)</span>
-<span id="cb5-2"><a href=""></a>Rows<span class="sc">:</span> <span class="dv">104937</span> Columns<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb5-3"><a href=""></a>Error <span class="cf">in</span> <span class="fu">nchar</span>(x, <span class="st">"width"</span>) <span class="sc">:</span> invalid multibyte string, element <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>r<span class="sc">$</span><span class="er">&gt;</span> <span class="fu">read_csv</span>(<span class="st">"myfile.csv"</span>)</span>
+<span id="cb4-2"><a href=""></a>Rows<span class="sc">:</span> <span class="dv">104937</span> Columns<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb4-3"><a href=""></a>Error <span class="cf">in</span> <span class="fu">nchar</span>(x, <span class="st">"width"</span>) <span class="sc">:</span> invalid multibyte string, element <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <aside><div>
