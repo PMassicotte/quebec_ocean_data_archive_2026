@@ -49,7 +49,6 @@ library(tidyverse)
 library(ggpmthemes)
 library(patchwork)
 library(stars)
-library(gt)
 library(rnaturalearthdata)
 library(rnaturalearthhires)
 library(tidytext)
@@ -484,16 +483,8 @@ pixel_values |>
     longitude = x,
     latitude = y
   ) |>
-  gt() |>
-  tab_options(
-    table.width = pct(50L),
-    table.font.size = 40L,
-    column_labels.font.weight = "cold"
-  ) |>
-  fmt_number(
-    columns = "sst",
-    decimals = 2L
-  )
+  mutate(sst = round(sst, digits = 2L)) |>
+  knitr::kable()
 ```
 
 :::

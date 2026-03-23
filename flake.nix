@@ -126,7 +126,6 @@
           ggpmthemes
           ggthemes
           glue
-          gt
           here
           httpgd
           janitor
