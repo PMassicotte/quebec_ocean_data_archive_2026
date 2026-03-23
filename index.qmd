@@ -362,6 +362,8 @@ In your code:
 - Avoid commenting the [what]{.emphasize}, and instead comment the [why]{.emphasize}.
 - Use meaningful variable names.
 
+For example, we want to remove low value of chlorophyll-a from a dataset. Which of the two code snippets below is better?
+
 :::: {.columns}
 
 ::: {.column width=50%}
@@ -668,11 +670,7 @@ These two examples show the same data. One is arranged as two tables whereas the
 
 ::::
 
-## Keep your data as rectangle tables
-
-Do not be that person 😩😖😠😤😣🤦‍♀️🤦‍♂️😑😓
-
-![](img/screenshots/data_rectangle3.png){.r-stretch fig-alt="Data in a computer spreadsheet program. Data is not arranged in a rectangle table and there is a graphic placed inside the sheet."}
+# {background-image="img/screenshots/bad_excel.png" .stretch data-background-size="contain" data-background-position="center" data-background-repeat="no-repeat"}
 
 ## Missing values
 
