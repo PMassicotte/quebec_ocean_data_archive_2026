@@ -156,356 +156,55 @@ Ideally, the chosen file format should have these characteristics:
 
 :::
 
-## Common open-source text file formats
+## Common open-source tabular file formats
 
-Tabular plain text file formats:
+Plain text file formats that can be opened using a simple text editor:
+
+::: {.incremental}
 
 - `.CSV`: Comma (or semicolon) separated values.
 
-- `.TAB`: Tab separated values.
+- `.TSV` / `.TAB`: Tab separated values.
 
 - `.TXT` and `.DAT`: Plain text files ([data delimiter is not known]{.emphasize}).
 
-All these file formats can be opened using a simple text editor.
+- [Apache Parquet](https://parquet.apache.org/){target="\_blank"} (`.parquet`): columnar binary format, excellent for large datasets.
 
-## Examples of CSV and TSV files
-
-<!-- Screenshots made using maim -->
-<!-- maim ~/Desktop/penguins_tsv_format.png -g 1300x725+4070+210 -->
-
-![](img/artwork/lter_penguins.png){fig-alt="The Palmer penguin representation by Allison Horst. The image shows three penguins: Adelie, Chinstrap, and Gentoo." .top-right-img}
-
-This dataset contains 4 variables (columns). [The first line generally includes the names of the variables.]{.emphasize}
-
-:::: {.columns}
-
-::: {.column width=50%}
-
-[A comma-separated values file (`.csv`).]{.smaller}
-
-![](./img/screenshots/penguins_csv_format.png){fig-alt="Screenshot of a CSV file with the content of the Palmer penguins dataset"}
-
-:::
-
-::: {.column width=50%}
-
-[A tabs separated values file (`.tsv`).]{.smaller}
-
-![](./img/screenshots/penguins_tsv_format.png){fig-alt="Screenshot of a TSV file with the content of the Palmer penguins dataset"}
-
-:::
-
-::::
-
-::: aside
-Data source: Horst AM, Hill AP, Gorman KB (2020). palmerpenguins: Palmer Archipelago (Antarctica) penguin data. R package version 0.1.0. [https://allisonhorst.github.io/palmerpenguins/](https://allisonhorst.github.io/palmerpenguins/){target="\_blank"} Artwork by @allison_horst.
 :::
 
 ## Common open-source geographic file formats
 
-These files contain information on geographic features such as [points, lines or polygons]{.emphasize}. There are a ton of [geographical file formats](https://gisgeography.com/gis-formats/){target="\_blank"}, but here are some that are particularly popular.
+Geographic features such as [points, lines or polygons]{.emphasize}:
 
 ::: {.incremental}
 
-- ESRI shapefile (`.SHP`)
-  - Technically, the shapefile format is not open. [It is, however, widely used.]{.emphasize}
+- ESRI Shapefile (`.shp`) — widely used, but [technically not open]{.emphasize}.
 
-- GeoJSON (`.geojson`, JSON variant with simple geographical features)
+- GeoJSON (`.geojson`) — JSON-based, human-readable, great for web mapping.
 
-- GeoTIFF (`.tif`, `.tiff`, TIFF variant enriched with GIS relevant metadata)
+- GeoTIFF (`.tif`) — georeferenced raster data (e.g., satellite imagery, SST).
 
-- GeoParquet (`.parquet`) is an [Open Geospatial Consortium (OGC) standard](https://geoparquet.org/){target="\_blank"} standard that adds interoperable geospatial types (Point, Line, Polygon) to [Apache Parquet](https://parquet.apache.org/){target="\_blank"}.
-
-:::
-
-## The GeoJSON format (Polygons)
-
-This is a simple GeoJSON file defining 3 points that form a polygon.
-
-:::: {.columns}
-
-::: {.column width=25%}
-
-```{.json}
-{
-  "type": "Polygon",
-  "coordinates": [
-    [30, 10],
-    [10, 30],
-    [40, 40],
-    [30, 10]
-  ]
-}
-```
+- [GeoParquet](https://geoparquet.org/){target="\_blank"} (`.parquet`) — adds geospatial types to Apache Parquet ([OGC standard]{.emphasize}).
 
 :::
-
-::: {.column width=75%}
-
-```{r}
-#| label: geojson-polygon
-#| message: false
-#| out-width: 50%
-#| crop: true
-#| dev: ragg_png
-#| fig-alt: "A triangle polygon plotted with ggplot2, defined by three GeoJSON coordinates shown as red points at each vertex."
-sf_polygon <- sf::st_read(
-  '{ "type": "Polygon",
-    "coordinates": [
-        [[30, 10], [10, 30], [40, 40], [30, 10]]
-  ]
-}',
-  quiet = TRUE
-)
-
-sf_point <- sf_polygon |>
-  st_cast("POINT")
-
-sf_polygon |>
-  ggplot() +
-  geom_sf(linewidth = 3L, color = "#3c3c3c") +
-  geom_sf(data = sf_point, size = 8L, color = "red") +
-  coord_sf()
-```
-
-:::
-
-::::
-
-::: {.aside}
-
-Create your own GeoJSON file online at [https://geojson.io/](https://geojson.io/){target="\_blank"}
-
-:::
-
-## The GeoJSON format
-
-```{r}
-#| label: geojson-colosseum
-#| out-width: 75%
-#| crop: true
-#| dev: ragg_png
-#| fig.cap: "Data: [https://bit.ly/2pAjOAr](https://bit.ly/2pAjOAr)"
-#| fig-alt: "The outline of the Colosseum amphitheatre in Rome created using a geojson file."
-
-url <-
-  "https://github.com/Robinlovelace/Creating-maps-in-R/raw/master/data/test-multifeature.geojson"
-sf <- sf::st_read(url, quiet = TRUE)
-sf |>
-  ggplot() +
-  geom_sf(linewidth = 0.25) +
-  labs(
-    title = str_wrap(
-      "The Colosseum amphitheatre in the centre of the city of Rome",
-      30L
-    )
-  ) +
-  coord_sf() +
-  theme(
-    plot.title = element_text(size = 14L, hjust = 0.5),
-    plot.title.position = "plot",
-    panel.grid = element_blank(),
-    axis.text = element_text(size = 6L)
-  )
-```
-
-## The GeoTIFF format
-
-Often associated with satellite imagery.
-
-> GeoTIFF is a public domain metadata standard that allows [georeferencing information to be embedded within a TIFF file.]{.emphasize} The potential additional information includes map projection, coordinate systems, ellipsoids, datums, and everything else necessary to establish the exact spatial reference for the file.
->
-> [Wikipedia](https://en.wikipedia.org/wiki/GeoTIFF){target="\_blank"}
-
-::: {.center-align}
-
-![](img/ai/geotiff.png){height=600 fig-alt="AI generated image of a computer screen showing some sci-fi images."}
-
-:::
-
-## The GeoTIFF format (SST)
-
-A GeoTIFF can contain information such as the Sea Surface Temperature (SST).
-
-```{r}
-#| label: sst-st-lawrence-map
-#| fig-format: png
-#| crop: true
-#| fig-dpi: 300
-#| fig-alt: "Sea Surface Temperature (SST) in the St-Lawrence River."
-#| out-width: 75%
-poly <- read_sf(
-  '{
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {},
-      "geometry": {
-        "type": "Polygon",
-        "coordinates": [
-          [
-            [
-              -66.44805908203125,
-              49.814948620925776
-            ],
-            [
-              -66.17340087890625,
-              49.814948620925776
-            ],
-            [
-              -66.17340087890625,
-              49.99891228081066
-            ],
-            [
-              -66.44805908203125,
-              49.99891228081066
-            ],
-            [
-              -66.44805908203125,
-              49.814948620925776
-            ]
-          ]
-        ]
-      }
-    }
-  ]
-}'
-)
-
-r <- read_stars(here::here("data", "sst_st_lawrence_river.tif"))
-
-ggplot() +
-  geom_stars(data = r) +
-  geom_sf(data = poly, fill = "red", color = NA) +
-  scale_fill_viridis_c(
-    breaks = scales::breaks_pretty(n = 6L),
-    na.value = NA,
-    guide = guide_colorbar(
-      title.position = "top",
-      title.hjust = 0.5,
-      title.theme = element_text(family = "Montserrat", size = 8L),
-      label.theme = element_text(family = "Montserrat", size = 6L),
-      barwidth = unit(4L, "cm"),
-      barheight = unit(0.2, "cm")
-    )
-  ) +
-  annotate(
-    "text",
-    x = -71L,
-    y = 46.5,
-    label = "Quebec",
-    family = "Montserrat",
-    fontface = "bold",
-    size = 4L
-  ) +
-  annotate(
-    "text",
-    x = -68.52396,
-    y = 48.44879,
-    label = "Rimouski",
-    family = "Montserrat",
-    fontface = "bold",
-    size = 4L,
-    hjust = -0.25
-  ) +
-  labs(
-    fill = "Water temperature (°C)",
-    x = NULL,
-    y = NULL,
-    title = "SST in the St-Lawrence River (2020-01-20)"
-  ) +
-  theme(
-    legend.justification = c(0L, 0L),
-    legend.position = c(0.02, 0.8),
-    legend.direction = "horizontal",
-    legend.background = element_blank(),
-    plot.title = element_text(size = 12L),
-    plot.caption = element_text(size = 8L)
-  )
-```
-
-## The GeoTIFF format (SST)
-
-A closer look allows us to better visualize the values (i.e., water temperature) within each pixel.
-
-```{r}
-#| label: sst-pixel-values
-#| fig-height: 3
-#| fig-format: png
-#| crop: true
-#| fig-dpi: 300
-#| fig-alt: "Close-up view of Sea Surface Temperature pixel values in the St-Lawrence River, with numerical temperature values labeled within each raster cell."
-pixel_values <- r[poly] |>
-  as_tibble() |>
-  rename(sst = 3L)
-
-ggplot() +
-  geom_stars(data = r[poly], alpha = 0.75) +
-  # Using this hack to add N and W labels on the axis...
-  geom_sf(data = poly, fill = NA, color = NA) +
-  geom_text(
-    data = pixel_values,
-    aes(
-      x = x,
-      y = y,
-      label = round(sst, digits = 2L)
-    ),
-    fontface = "bold",
-    size = 3L
-  ) +
-  scale_fill_viridis_c() +
-  scale_x_continuous(breaks = seq(-70L, -65L, by = 0.1)) +
-  labs(
-    x = NULL,
-    y = NULL
-  ) +
-  coord_sf() +
-  guides(fill = "none")
-```
 
 ## A note on geospatial data
 
-It is usually a better idea to work with spatial objects (ex.: `GeoTIFF`, or `geoparquet`) rather than tabular data.
+It is usually a better idea to work with spatial objects (ex.: `GeoTIFF`, or `GeoParquet`) rather than tabular data.
 
-:::: {.columns}
+[Spatial formats preserve geometry, projection, and metadata]{.emphasize}, enabling:
 
-::: {.column width=50%}
+::: {.incremental}
 
-**Geographic data presented in a tabular form:**
+- Geometric operations (buffer, intersection, union)
 
-```{r}
-#| label: sst-tabular-data
-#| echo: false
-pixel_values |>
-  head() |>
-  rename(
-    longitude = x,
-    latitude = y
-  ) |>
-  mutate(sst = round(sst, digits = 2L)) |>
-  knitr::kable()
-```
+- Geographic projection and coordinate transformations
+
+- Spatial joins and data extraction
+
+- Direct visualization and mapping
 
 :::
-
-::: {.column width=50%}
-
-**It is much easier to work with _spatial data_:**
-
-- Geometric operations
-
-- Geographic Projection
-
-- Data extraction
-
-- Joining
-
-- And much more!
-
-:::
-
-::::
 
 # Data project good practices {background-color="#272e33"}
 
