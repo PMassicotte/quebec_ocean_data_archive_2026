@@ -100,8 +100,6 @@ Unless otherwise stated, all images in this presentation are AI generated.
 ::: {.incremental}
 
 - Open file formats for your data.
-  - Tabular data.
-  - Geographical data.
 
 - Data project organization and good practices.
   - Raw data management.
@@ -223,7 +221,7 @@ Basic recommendations to preserve the raw data for future use:
 - Do not make any changes or corrections to the original raw data files.
   - [Changes made today may turn out to be wrong tomorrow.]{.emphasize}
 
-- [Use a scripted language (R, Python, Matlab, etc.) to perform analysis or make corrections and save that information in a separate file.]{.emphasize}
+- [Use a scripted language (R, Python, Julia, etc.) to perform analysis or make corrections and save that information in a separate file.]{.emphasize}
 
 - If you want to do some analyses in Excel ^[In fact, do not use Excel {{< fa thumbs-down >}}], make a copy of the file and do your calculations and graphs in the copy.
 
@@ -275,7 +273,7 @@ Why bother documenting your data?
 
 - Use a `README` file to provide an overview of the project and instructions on how to use the data and scripts.
 
-- It can include:
+- It should include:
 
   ::: {.incremental}
   1. **Project description**: objectives and context.
@@ -362,7 +360,11 @@ In your code:
 - Avoid commenting the [what]{.emphasize}, and instead comment the [why]{.emphasize}.
 - Use meaningful variable names.
 
+. . .
+
 For example, we want to remove low value of chlorophyll-a from a dataset. Which of the two code snippets below is better?
+
+. . .
 
 :::: {.columns}
 
@@ -517,21 +519,21 @@ _Imagine that you have to create a file containing temperature data from a weath
 
 . . .
 
-Be consistent with variable name capitalization:
-
-[{{< fa check >}}]{style="color: #34A74BFF;"} `temperature`, `precipitation`
-
-[{{< fa check >}}]{style="color: #34A74BFF;"} `Temperature`, `Precipitation`
-
-<br>
-
-. . .
-
 Avoid mixing name capitalization:
 
 [{{< fa times >}}]{style="color: #E6352FFF;"} `temperature`, `Precipitation`
 
 [{{< fa times >}}]{style="color: #E6352FFF;"} `temperature_min`, `TemperatureMax`
+
+<br>
+
+. . .
+
+Be consistent with variable name capitalization:
+
+[{{< fa check >}}]{style="color: #34A74BFF;"} `temperature`, `precipitation`
+
+[{{< fa check >}}]{style="color: #34A74BFF;"} `Temperature`, `Precipitation`
 
 ## Variable names
 
@@ -678,7 +680,7 @@ These two examples show the same data. One is arranged as two tables whereas the
 
 - [Missing values should be simply represented by spaces in your data files.]{.emphasize}
 
-- R, Python, Matlab and other programming languages deal well with this.
+- R, Python, Julia and other programming languages deal well with this.
 
 - If not possible, use a standardized code to represent missing values:
   - `NA`, `NaN`
