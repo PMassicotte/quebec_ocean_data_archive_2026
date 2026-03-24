@@ -255,11 +255,7 @@
 <section id="outlines" class="slide level2">
 <h2>Outlines</h2>
 <ul>
-<li class="fragment"><p>Open file formats for your data.</p>
-<ul>
-<li class="fragment">Tabular data.</li>
-<li class="fragment">Geographical data.</li>
-</ul></li>
+<li class="fragment"><p>Open file formats for your data.</p></li>
 <li class="fragment"><p>Data project organization and good practices.</p>
 <ul>
 <li class="fragment">Raw data management.</li>
@@ -348,7 +344,7 @@
 <ul>
 <li class="fragment"><span class="emphasize">Changes made today may turn out to be wrong tomorrow.</span></li>
 </ul></li>
-<li class="fragment"><p><span class="emphasize">Use a scripted language (R, Python, Matlab, etc.) to perform analysis or make corrections and save that information in a separate file.</span></p></li>
+<li class="fragment"><p><span class="emphasize">Use a scripted language (R, Python, Julia, etc.) to perform analysis or make corrections and save that information in a separate file.</span></p></li>
 <li class="fragment"><p>If you want to do some analyses in Excel <sup>1</sup>, make a copy of the file and do your calculations and graphs in the copy.</p></li>
 </ul>
 <div class="fragment">
@@ -389,7 +385,7 @@
 <h2>Documentation and metadata</h2>
 <ul>
 <li><p>Use a <code>README</code> file to provide an overview of the project and instructions on how to use the data and scripts.</p></li>
-<li><p>It can include:</p>
+<li><p>It should include:</p>
 <ol type="1">
 <li class="fragment"><p><strong>Project description</strong>: objectives and context.</p></li>
 <li class="fragment"><p><strong>Directory structure</strong>: what is in each folder.</p></li>
@@ -467,7 +463,10 @@
 <li>Avoid commenting the <span class="emphasize">what</span>, and instead comment the <span class="emphasize">why</span>.</li>
 <li>Use meaningful variable names.</li>
 </ul>
+<div class="fragment">
 <p>For example, we want to remove low value of chlorophyll-a from a dataset. Which of the two code snippets below is better?</p>
+</div>
+<div class="fragment">
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Bad <span style="color: #E6352FFF;"><i class="fa-solid fa-times" aria-label="times"></i></span></p>
@@ -481,6 +480,7 @@
 <span id="cb3-3"><a href=""></a>min_chla_mg_m3 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
 <span id="cb3-4"><a href=""></a>ctd <span class="ot">&lt;-</span> ctd[ctd<span class="sc">$</span>chla <span class="sc">&gt;=</span> min_chla_mg_m3, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
+</div>
 </section></section>
 <section>
 <section id="file-and-variable-naming" class="title-slide slide level1 center" data-background-color="#272e33">
@@ -581,15 +581,15 @@
 <section id="variable-names" class="slide level2">
 <h2>Variable names</h2>
 <div class="fragment">
-<p>Be consistent with variable name capitalization:</p>
-<p><span style="color: #34A74BFF;"><i class="fa-solid fa-check" aria-label="check"></i></span> <code>temperature</code>, <code>precipitation</code></p>
-<p><span style="color: #34A74BFF;"><i class="fa-solid fa-check" aria-label="check"></i></span> <code>Temperature</code>, <code>Precipitation</code></p>
-<p><br></p>
-</div>
-<div class="fragment">
 <p>Avoid mixing name capitalization:</p>
 <p><span style="color: #E6352FFF;"><i class="fa-solid fa-times" aria-label="times"></i></span> <code>temperature</code>, <code>Precipitation</code></p>
 <p><span style="color: #E6352FFF;"><i class="fa-solid fa-times" aria-label="times"></i></span> <code>temperature_min</code>, <code>TemperatureMax</code></p>
+<p><br></p>
+</div>
+<div class="fragment">
+<p>Be consistent with variable name capitalization:</p>
+<p><span style="color: #34A74BFF;"><i class="fa-solid fa-check" aria-label="check"></i></span> <code>temperature</code>, <code>precipitation</code></p>
+<p><span style="color: #34A74BFF;"><i class="fa-solid fa-check" aria-label="check"></i></span> <code>Temperature</code>, <code>Precipitation</code></p>
 </div>
 </section>
 <section id="variable-names-1" class="slide level2">
@@ -710,7 +710,7 @@
 <h2>Missing values</h2>
 <ul>
 <li class="fragment"><p><span class="emphasize">Missing values should be simply represented by spaces in your data files.</span></p></li>
-<li class="fragment"><p>R, Python, Matlab and other programming languages deal well with this.</p></li>
+<li class="fragment"><p>R, Python, Julia and other programming languages deal well with this.</p></li>
 <li class="fragment"><p>If not possible, use a standardized code to represent missing values:</p>
 <ul>
 <li class="fragment"><code>NA</code>, <code>NaN</code></li>
