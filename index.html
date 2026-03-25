@@ -328,6 +328,40 @@
 <li class="fragment"><p>Spatial joins and data extraction</p></li>
 <li class="fragment"><p>Direct visualization and mapping</p></li>
 </ul>
+</section>
+<section id="a-simple-example" class="slide level2">
+<h2>A simple example</h2>
+<p>Original data using <code>EPSG:3413</code> (NSIDC Sea Ice Polar Stereographic North):</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 3 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -5e+05 ymin: -1500000 xmax: 5e+05 ymax: -5e+05
+Projected CRS: WGS 84 / NSIDC Sea Ice Polar Stereographic North
+  id      name               geometry
+1  1 Station A  POINT (-5e+05 -1e+06)
+2  2 Station B       POINT (0 -5e+05)
+3  3 Station C POINT (5e+05 -1500000)</code></pre>
+</div>
+</div>
+<p><br></p>
+<div class="fragment">
+<p>Reproject to WGS84 (<code>EPSG:4326</code>) with a single function call:</p>
+<div class="cell" data-layout-align="center">
+<div class="cell-output cell-output-stdout">
+<pre><code>Simple feature collection with 3 features and 2 fields
+Geometry type: POINT
+Dimension:     XY
+Bounding box:  xmin: -71.56505 ymin: 75.47915 xmax: -26.56505 ymax: 85.38675
+Geodetic CRS:  WGS 84
+  id      name                   geometry
+1  1 Station A POINT (-71.56505 79.70578)
+2  2 Station B       POINT (-45 85.38675)
+3  3 Station C POINT (-26.56505 75.47915)</code></pre>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="data-project-good-practices" class="title-slide slide level1 center" data-background-color="#272e33">
@@ -430,31 +464,31 @@
 <section id="documenting-your-code" class="slide level2">
 <h2>Documenting your code</h2>
 <p>Add a <strong>header block</strong> at the top of each script/function:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="font-size: 1em;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href=""></a><span class="co">#' Convert Coordinates</span></span>
-<span id="cb1-2"><a href=""></a><span class="co">#'</span></span>
-<span id="cb1-3"><a href=""></a><span class="co">#' This function converts coordinates from degrees and minutes to decimal</span></span>
-<span id="cb1-4"><a href=""></a><span class="co">#' degrees.</span></span>
-<span id="cb1-5"><a href=""></a><span class="co">#'</span></span>
-<span id="cb1-6"><a href=""></a><span class="co">#' @param coords A character vector of coordinates in the format "degrees</span></span>
-<span id="cb1-7"><a href=""></a><span class="co">#' minutes".</span></span>
-<span id="cb1-8"><a href=""></a><span class="co">#'</span></span>
-<span id="cb1-9"><a href=""></a><span class="co">#' @return A character vector of coordinates in decimal degrees.</span></span>
-<span id="cb1-10"><a href=""></a>convert_coords <span class="ot">&lt;-</span> <span class="cf">function</span>(coords) {</span>
-<span id="cb1-11"><a href=""></a>  parts <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(coords, <span class="st">" "</span>, <span class="dv">2</span>L)</span>
-<span id="cb1-12"><a href=""></a></span>
-<span id="cb1-13"><a href=""></a>  degrees <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">1</span>L])</span>
-<span id="cb1-14"><a href=""></a>  minutes <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">2</span>L])</span>
-<span id="cb1-15"><a href=""></a></span>
-<span id="cb1-16"><a href=""></a>  decimal_degrees <span class="ot">&lt;-</span> degrees <span class="sc">+</span> (minutes <span class="sc">/</span> <span class="dv">60</span>L)</span>
-<span id="cb1-17"><a href=""></a></span>
-<span id="cb1-18"><a href=""></a>  signed_degrees <span class="ot">&lt;-</span> <span class="fu">if_else</span>(</span>
-<span id="cb1-19"><a href=""></a>    <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"W"</span>)) <span class="sc">|</span> <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"S"</span>)),</span>
-<span id="cb1-20"><a href=""></a>    <span class="sc">-</span>decimal_degrees,</span>
-<span id="cb1-21"><a href=""></a>    decimal_degrees</span>
-<span id="cb1-22"><a href=""></a>  )</span>
-<span id="cb1-23"><a href=""></a></span>
-<span id="cb1-24"><a href=""></a>  <span class="fu">as.character</span>(signed_degrees)</span>
-<span id="cb1-25"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" style="font-size: 1em;"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co">#' Convert Coordinates</span></span>
+<span id="cb3-2"><a href=""></a><span class="co">#'</span></span>
+<span id="cb3-3"><a href=""></a><span class="co">#' This function converts coordinates from degrees and minutes to decimal</span></span>
+<span id="cb3-4"><a href=""></a><span class="co">#' degrees.</span></span>
+<span id="cb3-5"><a href=""></a><span class="co">#'</span></span>
+<span id="cb3-6"><a href=""></a><span class="co">#' @param coords A character vector of coordinates in the format "degrees</span></span>
+<span id="cb3-7"><a href=""></a><span class="co">#' minutes".</span></span>
+<span id="cb3-8"><a href=""></a><span class="co">#'</span></span>
+<span id="cb3-9"><a href=""></a><span class="co">#' @return A character vector of coordinates in decimal degrees.</span></span>
+<span id="cb3-10"><a href=""></a>convert_coords <span class="ot">&lt;-</span> <span class="cf">function</span>(coords) {</span>
+<span id="cb3-11"><a href=""></a>  parts <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(coords, <span class="st">" "</span>, <span class="dv">2</span>L)</span>
+<span id="cb3-12"><a href=""></a></span>
+<span id="cb3-13"><a href=""></a>  degrees <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">1</span>L])</span>
+<span id="cb3-14"><a href=""></a>  minutes <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(parts[, <span class="dv">2</span>L])</span>
+<span id="cb3-15"><a href=""></a></span>
+<span id="cb3-16"><a href=""></a>  decimal_degrees <span class="ot">&lt;-</span> degrees <span class="sc">+</span> (minutes <span class="sc">/</span> <span class="dv">60</span>L)</span>
+<span id="cb3-17"><a href=""></a></span>
+<span id="cb3-18"><a href=""></a>  signed_degrees <span class="ot">&lt;-</span> <span class="fu">if_else</span>(</span>
+<span id="cb3-19"><a href=""></a>    <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"W"</span>)) <span class="sc">|</span> <span class="fu">str_ends</span>(parts[, <span class="dv">2</span>L], <span class="fu">fixed</span>(<span class="st">"S"</span>)),</span>
+<span id="cb3-20"><a href=""></a>    <span class="sc">-</span>decimal_degrees,</span>
+<span id="cb3-21"><a href=""></a>    decimal_degrees</span>
+<span id="cb3-22"><a href=""></a>  )</span>
+<span id="cb3-23"><a href=""></a></span>
+<span id="cb3-24"><a href=""></a>  <span class="fu">as.character</span>(signed_degrees)</span>
+<span id="cb3-25"><a href=""></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="documenting-your-code-1" class="slide level2">
 <h2>Documenting your code</h2>
@@ -470,15 +504,15 @@
 <div class="columns">
 <div class="column" style="width:50%;">
 <p>Bad <span style="color: #E6352FFF;"><i class="fa-solid fa-times" aria-label="times"></i></span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href=""></a><span class="co"># Remove low values</span></span>
-<span id="cb2-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb2-3"><a href=""></a>d <span class="ot">&lt;-</span> d[d<span class="sc">$</span>v <span class="sc">&gt;=</span> x, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a><span class="co"># Remove low values</span></span>
+<span id="cb4-2"><a href=""></a>x <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb4-3"><a href=""></a>d <span class="ot">&lt;-</span> d[d<span class="sc">$</span>v <span class="sc">&gt;=</span> x, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div><div class="column" style="width:50%;">
 <p>Good <span style="color: #34A74BFF;"><i class="fa-solid fa-check" aria-label="check"></i></span></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href=""></a><span class="co"># Chlorophyll-a below 0.1 mg/m³ is below</span></span>
-<span id="cb3-2"><a href=""></a><span class="co"># sensor detection limit (SeaBird SBE 19+)</span></span>
-<span id="cb3-3"><a href=""></a>min_chla_mg_m3 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
-<span id="cb3-4"><a href=""></a>ctd <span class="ot">&lt;-</span> ctd[ctd<span class="sc">$</span>chla <span class="sc">&gt;=</span> min_chla_mg_m3, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="co"># Chlorophyll-a below 0.1 mg/m³ is below</span></span>
+<span id="cb5-2"><a href=""></a><span class="co"># sensor detection limit (SeaBird SBE 19+)</span></span>
+<span id="cb5-3"><a href=""></a>min_chla_mg_m3 <span class="ot">&lt;-</span> <span class="fl">0.1</span></span>
+<span id="cb5-4"><a href=""></a>ctd <span class="ot">&lt;-</span> ctd[ctd<span class="sc">$</span>chla <span class="sc">&gt;=</span> min_chla_mg_m3, ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div></div>
 </div>
 </section></section>
@@ -618,9 +652,9 @@
 <p><img data-src="img/screenshots/invalid_multibyte_string.png" style="width:70.0%" alt="Screenshot showing an error message in R when trying to read a file with a special character."></p>
 </div>
 <div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href=""></a>r<span class="sc">$</span><span class="er">&gt;</span> <span class="fu">read_csv</span>(<span class="st">"myfile.csv"</span>)</span>
-<span id="cb4-2"><a href=""></a>Rows<span class="sc">:</span> <span class="dv">104937</span> Columns<span class="sc">:</span> <span class="dv">1</span></span>
-<span id="cb4-3"><a href=""></a>Error <span class="cf">in</span> <span class="fu">nchar</span>(x, <span class="st">"width"</span>) <span class="sc">:</span> invalid multibyte string, element <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href=""></a>r<span class="sc">$</span><span class="er">&gt;</span> <span class="fu">read_csv</span>(<span class="st">"myfile.csv"</span>)</span>
+<span id="cb6-2"><a href=""></a>Rows<span class="sc">:</span> <span class="dv">104937</span> Columns<span class="sc">:</span> <span class="dv">1</span></span>
+<span id="cb6-3"><a href=""></a>Error <span class="cf">in</span> <span class="fu">nchar</span>(x, <span class="st">"width"</span>) <span class="sc">:</span> invalid multibyte string, element <span class="dv">1</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 </div>
 <aside><div>
