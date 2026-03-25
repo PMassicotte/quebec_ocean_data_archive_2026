@@ -204,6 +204,40 @@ It is usually a better idea to work with spatial objects (ex.: `GeoTIFF`, or `Ge
 
 :::
 
+
+## A simple example
+
+Original data using `EPSG:3413` (NSIDC Sea Ice Polar Stereographic North):
+
+```{r}
+#| label: spatial_formats
+
+library(sf)
+
+sf_object <- st_sf(
+  id = 1:3,
+  name = c("Station A", "Station B", "Station C"),
+  geometry = st_sfc(
+    st_point(c(-500000, -1000000)),
+    st_point(c(0, -500000)),
+    st_point(c(500000, -1500000))
+  ),
+  crs = 3413
+)
+
+sf_object
+```
+
+<br>
+
+. . .
+
+Reproject to WGS84 (`EPSG:4326`) with a single function call:
+
+```{r}
+st_transform(sf_object, crs = 4326)
+```
+
 # Data project good practices {background-color="#272e33"}
 
 ::: {.center-align}
